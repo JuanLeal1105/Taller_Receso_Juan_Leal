@@ -2,17 +2,16 @@ package com.example.TallerReceso.Service;
 
 import com.example.TallerReceso.Model.document.Chef;
 import com.example.TallerReceso.Repository.ChefRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ChefService {
-    private final ChefRepository chefRepository;
+    @Autowired
+    private  ChefRepository chefRepository;
 
-    public ChefService(ChefRepository chefRepository) {
-        this.chefRepository = chefRepository;
-    }
 
     public Chef save(Chef chef) {
         Chef savedChef = chefRepository.save(chef);

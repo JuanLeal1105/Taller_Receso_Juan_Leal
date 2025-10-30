@@ -10,8 +10,11 @@ import java.util.HashMap;
 @Data
 public class RecipeDTO {
     private String userId;
+    private String userName;
     private String recipeName;
     private String recipeDescription;
+    private String season;
+    private KitchenRole kitchenRole;
 
-    private HashMap<String, ArrayList<Object>> details;
+    private HashMap<String, Object> details;
 }

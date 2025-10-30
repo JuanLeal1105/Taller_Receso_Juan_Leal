@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
 
 @Data
-@Document(collection = "recipes")
+@Document(collection = "Recipes")
 public class Recipe {
     @Id
     private String id;
@@ -21,5 +21,5 @@ public class Recipe {
 
     private String userId;
     private String userName;
-    private KitchenRole role;
+    private KitchenRole kitchenRole;
 }

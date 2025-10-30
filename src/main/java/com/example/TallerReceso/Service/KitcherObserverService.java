@@ -2,16 +2,15 @@ package com.example.TallerReceso.Service;
 
 import com.example.TallerReceso.Model.document.KitchenObserver;
 import com.example.TallerReceso.Repository.KitchenObserverRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class KitcherObserverService {
-    private final KitchenObserverRepository kitcherObserverRepository;
-    public KitcherObserverService(KitchenObserverRepository kitcherObserverRepository) {
-        this.kitcherObserverRepository = kitcherObserverRepository;
-    }
+    @Autowired
+    private KitchenObserverRepository kitcherObserverRepository;
 
 
     public KitchenObserver save(KitchenObserver kitchenObserver) {
