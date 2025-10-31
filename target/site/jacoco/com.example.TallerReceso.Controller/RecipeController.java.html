@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecipeController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TallerRecesoJuanLeal</a> &gt; <a href="index.source.html" class="el_package">com.example.TallerReceso.Controller</a> &gt; <span class="el_source">RecipeController.java</span></div><h1>RecipeController.java</h1><pre class="source lang-java linenums">package com.example.TallerReceso.Controller;
+
+import com.example.TallerReceso.Dto.recipeDTO.RecipeDTO;
+import com.example.TallerReceso.Dto.recipeDTO.RecipeResponseDTO;
+import com.example.TallerReceso.Dto.recipeDTO.ResponseDTO;
+import com.example.TallerReceso.Model.document.Ingredient;
+import com.example.TallerReceso.Model.document.Recipe;
+import com.example.TallerReceso.Model.recipeCreator.RecipeCreator;
+import com.example.TallerReceso.Service.RecipeService;
+import com.example.TallerReceso.util.KitchenRole;
+import com.example.TallerReceso.util.RecipeMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping(&quot;/api/recipes&quot;)
+<span class="fc" id="L24">public class RecipeController {</span>
+    @Autowired
+    private RecipeService recipeService;
+    @Autowired
+    private RecipeCreator recipeCreator;
+    @Autowired
+    private RecipeMapper recipeMapper;
+
+    @PostMapping
+    public ResponseEntity&lt;ResponseDTO&lt;Recipe&gt;&gt; addRecipe(@RequestBody RecipeDTO dto) {
+<span class="fc" id="L34">        Recipe recipe = recipeCreator.createRecipe(dto);</span>
+<span class="fc" id="L35">        Recipe saved = recipeService.save(recipe);</span>
+<span class="fc" id="L36">        return ResponseEntity.ok(ResponseDTO.success(saved, &quot;Successfully added recipe&quot;));</span>
+    }
+
+    @GetMapping
+    public ResponseEntity&lt;List&lt;RecipeResponseDTO&gt;&gt; getAllRecipes() {
+<span class="fc" id="L41">        List&lt;Recipe&gt; list = recipeService.findAll();</span>
+<span class="fc" id="L42">        List&lt;RecipeResponseDTO&gt; recipes = list.stream().map(recipeMapper::mapToRecipeResponseDTO).collect(Collectors.toList());</span>
+<span class="fc" id="L43">        return ResponseEntity.ok(recipes);</span>
+    }
+
+    @GetMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ResponseDTO&lt;RecipeResponseDTO&gt;&gt; findRecipeById(@PathVariable String id) {
+<span class="fc" id="L48">        Recipe recipe = recipeService.findById(id);</span>
+<span class="fc" id="L49">        RecipeResponseDTO recipeResponseDTO = recipeMapper.mapToRecipeResponseDTO(recipe);</span>
+<span class="fc" id="L50">        return ResponseEntity.ok(ResponseDTO.success(recipeResponseDTO, &quot;Successfully found recipe&quot;));</span>
+    }
+
+    @GetMapping(&quot;/kitchenRole/{kitcheRole}&quot;)
+    public ResponseEntity&lt;List&lt;RecipeResponseDTO&gt;&gt; findByKitchenRole(@PathVariable String kitcheRole) {
+<span class="fc" id="L55">        List&lt;Recipe&gt; list = recipeService.findByKitchenRole(kitcheRole);</span>
+<span class="fc" id="L56">        List&lt;RecipeResponseDTO&gt; recipes = list.stream().map(recipeMapper::mapToRecipeResponseDTO).collect(Collectors.toList());</span>
+<span class="fc" id="L57">        return ResponseEntity.ok(recipes);</span>
+    }
+
+    @GetMapping(&quot;/season/{season}&quot;)
+    public ResponseEntity&lt;List&lt;RecipeResponseDTO&gt;&gt; findBySeason(@PathVariable String season) {
+<span class="fc" id="L62">        List&lt;Recipe&gt; list = recipeService.findBySeason(season);</span>
+<span class="fc" id="L63">        List&lt;RecipeResponseDTO&gt; recipes = list.stream().map(recipeMapper::mapToRecipeResponseDTO).collect(Collectors.toList());</span>
+<span class="fc" id="L64">        return ResponseEntity.ok(recipes);</span>
+    }
+
+    @GetMapping(&quot;/ingredient/{ingredient}&quot;)
+    public ResponseEntity&lt;List&lt;RecipeResponseDTO&gt;&gt; findByIngredient(@PathVariable String ingredient) {
+<span class="fc" id="L69">        List&lt;Recipe&gt; list = recipeService.findByIngredient(ingredient);</span>
+<span class="fc" id="L70">        List&lt;RecipeResponseDTO&gt; recipes = list.stream().map(recipeMapper::mapToRecipeResponseDTO).collect(Collectors.toList());</span>
+<span class="fc" id="L71">        return ResponseEntity.ok(recipes);</span>
+    }
+
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ResponseDTO&lt;Void&gt;&gt; deleteRecipe(@PathVariable String id) {
+<span class="fc" id="L76">        recipeService.deleteById(id);</span>
+<span class="fc" id="L77">        return ResponseEntity.ok(ResponseDTO.success(null, &quot;Recipe deleted&quot;));</span>
+    }
+
+    @PutMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ResponseDTO&lt;RecipeResponseDTO&gt;&gt; updateRecipe(@PathVariable String id, @RequestBody RecipeDTO dto) {
+<span class="fc" id="L82">        Recipe existingRecipe = recipeService.findById(id);</span>
+<span class="fc" id="L83">        Recipe updated = recipeCreator.createRecipe(dto);</span>
+<span class="fc" id="L84">        updated.setId(id);</span>
+<span class="fc" id="L85">        Recipe saved = recipeService.save(updated);</span>
+<span class="fc" id="L86">        RecipeResponseDTO response = recipeMapper.mapToRecipeResponseDTO(saved);</span>
+<span class="fc" id="L87">        return ResponseEntity.ok(ResponseDTO.success(response, &quot;Recipe updated successfully&quot;));</span>
+    }
+
+    @PatchMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;ResponseDTO&lt;RecipeResponseDTO&gt;&gt; patchRecipeField(@PathVariable String id, @RequestBody Map&lt;String, Object&gt; updates) {
+<span class="fc" id="L92">        Recipe recipe = recipeService.findById(id);</span>
+
+<span class="fc" id="L94">        updates.forEach((field, value) -&gt; {</span>
+<span class="pc bpc" id="L95" title="8 of 9 branches missed.">            switch (field) {</span>
+                case &quot;recipeName&quot;:
+<span class="fc" id="L97">                    recipe.setRecipeName((String) value);</span>
+<span class="fc" id="L98">                    break;</span>
+                case &quot;recipeDescription&quot;:
+<span class="nc" id="L100">                    recipe.setRecipeDescription((String) value);</span>
+<span class="nc" id="L101">                    break;</span>
+                case &quot;season&quot;:
+<span class="nc" id="L103">                    recipe.setSeason((String) value);</span>
+<span class="nc" id="L104">                    break;</span>
+                case &quot;ingredients&quot;:
+<span class="nc" id="L106">                    recipe.setIngredients((ArrayList&lt;Ingredient&gt;) value);</span>
+<span class="nc" id="L107">                    break;</span>
+                case &quot;steps&quot;:
+<span class="nc" id="L109">                    recipe.setSteps((ArrayList&lt;String&gt;) value);</span>
+<span class="nc" id="L110">                    break;</span>
+                case &quot;userId&quot;:
+<span class="nc" id="L112">                    recipe.setUserId((String) value);</span>
+<span class="nc" id="L113">                    break;</span>
+                case &quot;userName&quot;:
+<span class="nc" id="L115">                    recipe.setUserName((String) value);</span>
+<span class="nc" id="L116">                    break;</span>
+                case &quot;kitchenRole&quot;:
+<span class="nc" id="L118">                    recipe.setKitchenRole(KitchenRole.valueOf(((String) value).toUpperCase()));</span>
+                    break;
+            }
+<span class="fc" id="L121">        });</span>
+<span class="fc" id="L122">        Recipe saved = recipeService.save(recipe);</span>
+<span class="fc" id="L123">        RecipeResponseDTO response = recipeMapper.mapToRecipeResponseDTO(saved);</span>
+<span class="fc" id="L124">        return ResponseEntity.ok(ResponseDTO.success(response, &quot;Recipe patched successfully&quot;));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

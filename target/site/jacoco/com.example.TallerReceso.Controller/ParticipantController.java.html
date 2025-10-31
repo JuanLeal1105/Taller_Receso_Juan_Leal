@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ParticipantController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TallerRecesoJuanLeal</a> &gt; <a href="index.source.html" class="el_package">com.example.TallerReceso.Controller</a> &gt; <span class="el_source">ParticipantController.java</span></div><h1>ParticipantController.java</h1><pre class="source lang-java linenums">package com.example.TallerReceso.Controller;
+
+import com.example.TallerReceso.Dto.recipeDTO.ResponseDTO;
+import com.example.TallerReceso.Model.document.Participant;
+import com.example.TallerReceso.Service.ParticipantService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(&quot;/api/participants&quot;)
+<span class="fc" id="L14">public class ParticipantController {</span>
+    @Autowired
+    private ParticipantService participantService;
+
+    @PostMapping
+    public ResponseEntity&lt;ResponseDTO&lt;Participant&gt;&gt; addParticipant(@RequestBody Participant participant) {
+<span class="fc" id="L20">        Participant saved  = participantService.save(participant);</span>
+<span class="fc" id="L21">        return ResponseEntity.ok(ResponseDTO.success(saved, &quot;Succesfully added participant&quot;));</span>
+    }
+
+    @GetMapping
+    public ResponseEntity&lt;List&lt;Participant&gt;&gt; getAllParticipants() {
+<span class="fc" id="L26">        return ResponseEntity.ok(participantService.findAll());</span>
+    }
+
+    @GetMapping(&quot;/id/{id}&quot;)
+    public ResponseEntity&lt;ResponseDTO&lt;Participant&gt;&gt; getParticipantById(@PathVariable String id) {
+<span class="fc" id="L31">        Participant participant = participantService.findById(id);</span>
+<span class="fc" id="L32">        return ResponseEntity.ok(ResponseDTO.success(participant, &quot;Succesfully found participant&quot;));</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

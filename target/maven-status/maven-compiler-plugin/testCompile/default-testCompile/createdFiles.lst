@@ -1,0 +1,12 @@
+com/example/TallerReceso/RecipeCreator/RecipeCreatorTest.class
+com/example/TallerReceso/Controller/RecipeControllerTest.class
+com/example/TallerReceso/Controller/KitchenObserverControllerTest.class
+com/example/TallerReceso/TallerRecesoApplicationTests.class
+com/example/TallerReceso/Service/KitchenObserverServiceTest.class
+com/example/TallerReceso/Controller/IngredientControllerTest.class
+com/example/TallerReceso/Controller/ChefControllerTest.class
+com/example/TallerReceso/Service/ChefServiceTest.class
+com/example/TallerReceso/Controller/ParticipantControllerTest.class
+com/example/TallerReceso/Service/ParticipantServiceTest.class
+com/example/TallerReceso/Service/RecipeServiceTest.class
+com/example/TallerReceso/Service/IngredientServiceTest.class
