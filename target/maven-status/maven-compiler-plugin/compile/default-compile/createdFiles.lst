@@ -1,4 +1,5 @@
 com/example/TallerReceso/Model/document/KitchenObserver.class
+com/example/TallerReceso/TallerRecesoApplication.class
 com/example/TallerReceso/Service/KitcherObserverService.class
 com/example/TallerReceso/Model/document/Chef.class
 com/example/TallerReceso/Repository/ChefRepository.class

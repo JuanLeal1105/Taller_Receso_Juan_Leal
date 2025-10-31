@@ -7,6 +7,7 @@ TallerRecesoJuanLeal,com.example.TallerReceso.Controller,RecipeController,36,191
 TallerRecesoJuanLeal,com.example.TallerReceso.Controller,ParticipantController,0,28,0,0,0,6,0,4,0,4
 TallerRecesoJuanLeal,com.example.TallerReceso.util,KitchenRole,0,21,0,0,0,4,0,1,0,1
 TallerRecesoJuanLeal,com.example.TallerReceso.util,RecipeMapper,29,0,0,0,8,0,2,0,2,0
+TallerRecesoJuanLeal,com.example.TallerReceso,TallerRecesoApplication,8,0,0,0,3,0,2,0,2,0
 TallerRecesoJuanLeal,com.example.TallerReceso.Service,ChefService,0,28,0,0,0,5,0,5,0,5
 TallerRecesoJuanLeal,com.example.TallerReceso.Service,ParticipantService,0,28,0,0,0,5,0,5,0,5
 TallerRecesoJuanLeal,com.example.TallerReceso.Service,KitcherObserverService,0,28,0,0,0,5,0,5,0,5
