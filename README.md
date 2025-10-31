@@ -173,6 +173,16 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 
 ____
 
+## Despliegue del proyecto en Azure
+
+**Url de Swagger**
+
+https://tallersito-masterchefjuanleal-fghhfjf0ctb4hqbf.brazilsouth-01.azurewebsites.net/swagger-ui/index.html#/
+
+**Evidencia**
+![Captura](Docs/Images/evidencia_swagger.png)
+
+___
 ## Cobertura de pruebas 
 
 A continuación presentamos la cobertura de las pruebas realizadas:
