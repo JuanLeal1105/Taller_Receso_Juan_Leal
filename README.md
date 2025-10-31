@@ -41,7 +41,34 @@ Los componentes principales de la API Rest propuesta son los siguientes document
 - Nombre (y rol) del chef: concursante, jurado o televidente
 - Temporada a la que pertenece
 - Identificador único y metadatos adicionales para segmentación y búsqueda
+___
+# Instrucciones de instalación y ejecución local
 
+**Requisitos previos**
+
+- JDK 17 o superior
+- Maven 3.8+
+- Conexión a internet
+
+### Paso a Paso
+**Clonar el Repositorio**
+```
+git clone https://github.com/JuanLeal1105/Taller_Receso_Juan_Leal
+```
+
+**Construir el proyecto**
+```
+mvn clean install
+```
+
+**Ejecutar la aplicación**
+```
+mvn spring-boot:run
+```
+
+**Acceso Local**
+Una vez iniciada, la API estará disponible en: `http://localhost:8082/swagger-ui/index.html`
+  
 ___
 
 ## Persistencia de los datos
@@ -181,6 +208,13 @@ https://tallersito-masterchefjuanleal-fghhfjf0ctb4hqbf.brazilsouth-01.azurewebsi
 
 **Evidencia**
 ![Captura](Docs/Images/evidencia_swagger.png)
+
+### GitHub Actions
+
+El proceso de integración y despliegue continuo funciona de la siguiente manera:
+- CI: Se ejecutan pruebas automáticamente cada vez que se realiza un push o pull request en la rama develop.
+- CD: El despliegue se realiza de forma automática en Azure cuando se hace un push a la rama main.
+- Archivo de workflow: `.github/workflows/ci-cd.yml`
 
 ___
 ## Cobertura de pruebas 
