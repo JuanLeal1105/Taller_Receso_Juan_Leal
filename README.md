@@ -82,7 +82,7 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 ```
 
 **Resultado**
-
+![Captura](Docs/Images/Post_observer.png)
 
 ### POST - Participant
 
@@ -98,7 +98,7 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 ```
 
 **Resultado**
-
+![Captura](Docs/Images/Post_participant.png)
 
 ### POST - Ingredient
 
@@ -113,7 +113,7 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 ```
 
 **Resultado**
-
+![Captura](Docs/Images/Post_Ingredient.png)
 
 ### POST - Recipe
 
@@ -157,10 +157,20 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 ```
 
 **Resultado**
-
+![Captura](Docs/Images/Post_recipe.png)
 
 ### GET - Recipe by Role
+![Captura](Docs/Images/Get_role.png)
+![Captura](Docs/Images/Get_role_response.png)
 
 ### GET - Recipe by Ingredient
+![Captura](Docs/Images/Get_ingredient.png)
+![Captura](Docs/Images/Get_ingredient_response.png)
 
 ### GET - Recipe by Season
+![Captura](Docs/Images/Get_season.png)
+![Captura](Docs/Images/Get_season_response.png)
+
+____
+
+## Cobertura de pruebas 
