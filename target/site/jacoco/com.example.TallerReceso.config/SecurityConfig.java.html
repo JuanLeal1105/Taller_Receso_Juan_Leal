@@ -9,26 +9,26 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-<span class="fc" id="L12">public class SecurityConfig {</span>
+<span class="nc" id="L12">public class SecurityConfig {</span>
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-<span class="fc" id="L16">        http</span>
-<span class="fc" id="L17">                .csrf(csrf -&gt; csrf.disable()) // Desactiva CSRF para Swagger POST</span>
-<span class="fc" id="L18">                .authorizeHttpRequests(auth -&gt; auth</span>
-<span class="fc" id="L19">                        .requestMatchers(</span>
+<span class="nc" id="L16">        http</span>
+<span class="nc" id="L17">                .csrf(csrf -&gt; csrf.disable()) // Desactiva CSRF para Swagger POST</span>
+<span class="nc" id="L18">                .authorizeHttpRequests(auth -&gt; auth</span>
+<span class="nc" id="L19">                        .requestMatchers(</span>
                                 &quot;/swagger-ui/**&quot;,
                                 &quot;/v3/api-docs/**&quot;,
                                 &quot;/v3/api-docs.yaml&quot;,
                                 &quot;/swagger-resources/**&quot;,
                                 &quot;/webjars/**&quot;,
                                 &quot;/api/**&quot; // Tus endpoints REST
-<span class="fc" id="L26">                        ).permitAll()</span>
-<span class="fc" id="L27">                        .anyRequest().authenticated()</span>
+<span class="nc" id="L26">                        ).permitAll()</span>
+<span class="nc" id="L27">                        .anyRequest().authenticated()</span>
                 )
-<span class="fc" id="L29">                .httpBasic(Customizer.withDefaults()); // habilita HTTP Basic si lo necesitas</span>
+<span class="nc" id="L29">                .httpBasic(Customizer.withDefaults()); // habilita HTTP Basic si lo necesitas</span>
 
-<span class="fc" id="L31">        return http.build();</span>
+<span class="nc" id="L31">        return http.build();</span>
     }
 }
 
