@@ -3,16 +3,20 @@ package com.example.TallerReceso.Controller;
 import com.example.TallerReceso.Dto.recipeDTO.RecipeDTO;
 import com.example.TallerReceso.Dto.recipeDTO.RecipeResponseDTO;
 import com.example.TallerReceso.Dto.recipeDTO.ResponseDTO;
+import com.example.TallerReceso.Model.document.Ingredient;
 import com.example.TallerReceso.Model.document.Recipe;
 import com.example.TallerReceso.Model.recipeCreator.RecipeCreator;
 import com.example.TallerReceso.Service.RecipeService;
+import com.example.TallerReceso.util.KitchenRole;
 import com.example.TallerReceso.util.RecipeMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -73,4 +77,50 @@ public class RecipeController {
         return ResponseEntity.ok(ResponseDTO.success(null, "Recipe deleted"));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ResponseDTO<RecipeResponseDTO>> updateRecipe(@PathVariable String id, @RequestBody RecipeDTO dto) {
+        Recipe existingRecipe = recipeService.findById(id);
+        Recipe updated = recipeCreator.createRecipe(dto);
+        updated.setId(id);
+        Recipe saved = recipeService.save(updated);
+        RecipeResponseDTO response = recipeMapper.mapToRecipeResponseDTO(saved);
+        return ResponseEntity.ok(ResponseDTO.success(response, "Recipe updated successfully"));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ResponseDTO<RecipeResponseDTO>> patchRecipeField(@PathVariable String id, @RequestBody Map<String, Object> updates) {
+        Recipe recipe = recipeService.findById(id);
+
+        updates.forEach((field, value) -> {
+            switch (field) {
+                case "recipeName":
+                    recipe.setRecipeName((String) value);
+                    break;
+                case "recipeDescription":
+                    recipe.setRecipeDescription((String) value);
+                    break;
+                case "season":
+                    recipe.setSeason((String) value);
+                    break;
+                case "ingredients":
+                    recipe.setIngredients((ArrayList<Ingredient>) value);
+                    break;
+                case "steps":
+                    recipe.setSteps((ArrayList<String>) value);
+                    break;
+                case "userId":
+                    recipe.setUserId((String) value);
+                    break;
+                case "userName":
+                    recipe.setUserName((String) value);
+                    break;
+                case "kitchenRole":
+                    recipe.setKitchenRole(KitchenRole.valueOf(((String) value).toUpperCase()));
+                    break;
+            }
+        });
+        Recipe saved = recipeService.save(recipe);
+        RecipeResponseDTO response = recipeMapper.mapToRecipeResponseDTO(saved);
+        return ResponseEntity.ok(ResponseDTO.success(response, "Recipe patched successfully"));
+    }
 }

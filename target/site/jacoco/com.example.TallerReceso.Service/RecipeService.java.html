@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RecipeService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">TallerRecesoJuanLeal</a> &gt; <a href="index.source.html" class="el_package">com.example.TallerReceso.Service</a> &gt; <span class="el_source">RecipeService.java</span></div><h1>RecipeService.java</h1><pre class="source lang-java linenums">package com.example.TallerReceso.Service;
+
+import com.example.TallerReceso.Dto.recipeDTO.RecipeDTO;
+import com.example.TallerReceso.Dto.recipeDTO.RecipeResponseDTO;
+import com.example.TallerReceso.Model.document.Ingredient;
+import com.example.TallerReceso.Model.document.Recipe;
+import com.example.TallerReceso.Repository.RecipeRepository;
+import com.example.TallerReceso.util.KitchenRole;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+@Service
+<span class="fc" id="L17">public class RecipeService  {</span>
+    @Autowired
+    private RecipeRepository recipeRepository;
+    @Autowired
+    private IngredientService ingredientService;
+
+    public Recipe save(Recipe recipe){
+<span class="fc" id="L24">        return recipeRepository.save(recipe);</span>
+    }
+    public List&lt;Recipe&gt; findAll(){
+<span class="fc" id="L27">        return recipeRepository.findAll();</span>
+    }
+    public Recipe findById(String id){
+<span class="fc" id="L30">        return recipeRepository.findById(id).orElseThrow(()-&gt; new RuntimeException(&quot;The recipe does not exist&quot;));</span>
+    }
+    public void deleteById(String id){
+<span class="fc" id="L33">        recipeRepository.deleteById(id);</span>
+<span class="fc" id="L34">    }</span>
+
+    public List&lt;Recipe&gt; findByKitchenRole (String kitchenRole){
+        KitchenRole role;
+        try{
+<span class="fc" id="L39">            role = KitchenRole.valueOf(kitchenRole.toUpperCase());</span>
+<span class="fc" id="L40">        }catch (Exception e){</span>
+<span class="fc" id="L41">            throw new RuntimeException(&quot;Invalid kitchen role&quot;);</span>
+<span class="fc" id="L42">        }</span>
+<span class="fc" id="L43">        return recipeRepository.findByKitchenRole(role);</span>
+    }
+
+    public List&lt;Recipe&gt; findBySeason(String season){
+<span class="fc" id="L47">        return recipeRepository.findBySeason(season);</span>
+    }
+
+    public List&lt;Recipe&gt; findByIngredient(String ingredient){
+<span class="fc" id="L51">        List&lt;Recipe&gt; recipes = recipeRepository.findAll();</span>
+<span class="fc" id="L52">        return recipes.stream()</span>
+<span class="fc" id="L53">                .filter(recipe -&gt; recipe.getIngredients().stream()</span>
+<span class="fc" id="L54">                        .anyMatch(i -&gt; i.getIngredientName().equalsIgnoreCase(ingredient)))</span>
+<span class="fc" id="L55">                .collect(Collectors.toList());</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

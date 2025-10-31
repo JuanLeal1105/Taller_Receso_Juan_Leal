@@ -1,7 +1,8 @@
-package com.example.TallerReceso.Service;
+package com.example.TallerReceso.Controller;
 
 import com.example.TallerReceso.Dto.recipeDTO.ResponseDTO;
 import com.example.TallerReceso.Model.document.Ingredient;
+import com.example.TallerReceso.Service.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
