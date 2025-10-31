@@ -157,7 +157,7 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 ```
 
 **Resultado**
-![Captura](Docs/Images/Post_recipe.png)
+![Captura](Docs/Images/Post_Recipe.png)
 
 ### GET - Recipe by Role
 ![Captura](Docs/Images/Get_role.png)
@@ -165,7 +165,7 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 
 ### GET - Recipe by Ingredient
 ![Captura](Docs/Images/Get_ingredient.png)
-![Captura](Docs/Images/Get_ingredient_response.png)
+![Captura](Docs/Images/Get_Ingredient_response.png)
 
 ### GET - Recipe by Season
 ![Captura](Docs/Images/Get_season.png)
