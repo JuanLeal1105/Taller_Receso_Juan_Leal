@@ -174,3 +174,6 @@ Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual in
 ____
 
 ## Cobertura de pruebas 
+
+A continuación presentamos la cobertura de las pruebas realizadas:
+![Captura](Docs/Images/Pruebas.png)
