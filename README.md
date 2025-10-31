@@ -56,11 +56,111 @@ ___
 
 Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual ingresamos un JSON así:
 
+```json
 {
 "id": "ch2",
 "chefName": "Massimo Bottura",
 "email": "massimo.bottura@osteria.com",
 "role": "CHEF"
 }
+```
 
 **Resultado**
+![Captura](Docs/Images/Post_chef.png)
+
+### POST - KitchenObserver
+
+Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual ingresamos un JSON así:
+
+```json
+{
+  "id": "obs1",
+  "observerName": "John Doe",
+  "observerEmail": "john.doe@kitchen.com",
+  "role": "OBSERVER"
+}
+```
+
+**Resultado**
+
+
+### POST - Participant
+
+Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual ingresamos un JSON así:
+
+```json
+{
+  "id": "part1",
+  "participantName": "Alice Johnson",
+  "participantEmail": "alice.johnson@kitchen.com",
+  "role": "PARTICIPANT"
+}
+```
+
+**Resultado**
+
+
+### POST - Ingredient
+
+Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual ingresamos un JSON así:
+
+```json
+{
+  "id": "ing1",
+  "ingredientName": "Tomate",
+  "ingredientDescription": "Tomate fresco rojo"
+}
+```
+
+**Resultado**
+
+
+### POST - Recipe
+
+Para realizar la prueba de este Endpoint hacemos uso de Swagger, para lo cual ingresamos un JSON así:
+
+```json
+{
+  "userId": "ch1",
+  "userName": "Gordon Ramsay",
+  "recipeName": "Pizza Margherita",
+  "recipeDescription": "Receta clásica italiana con tomate, mozzarella y albahaca",
+  "season": "Summer",
+  "kitchenRole": "CHEF",
+  "details": {
+    "ingredients": [
+      {
+        "id": "ing1",
+        "ingredientName": "Tomate",
+        "ingredientDescription": "Tomate fresco rojo"
+      },
+      {
+        "id": "ing2",
+        "ingredientName": "Mozzarella",
+        "ingredientDescription": "Queso mozzarella fresco"
+      },
+      {
+        "id": "ing3",
+        "ingredientName": "Albahaca",
+        "ingredientDescription": "Hojas frescas de albahaca"
+      }
+    ],
+    "steps": [
+      "Precalentar el horno a 250°C",
+      "Extender la masa de pizza sobre la bandeja",
+      "Agregar tomate triturado sobre la masa",
+      "Colocar la mozzarella y albahaca encima",
+      "Hornear durante 10-12 minutos hasta que esté dorada"
+    ]
+  }
+} 
+```
+
+**Resultado**
+
+
+### GET - Recipe by Role
+
+### GET - Recipe by Ingredient
+
+### GET - Recipe by Season
